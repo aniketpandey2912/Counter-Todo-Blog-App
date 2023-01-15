@@ -67,11 +67,6 @@ const TodoApp = () => {
         <Heading mb="30px">TODO-APP</Heading>
         <VStack w="40%" m="auto">
           <TodoInput addTodo={addTodo} />
-          {todos.length === 0 ? (
-            <Heading as="h1" size="lg">
-              Empty list...
-            </Heading>
-          ) : null}
           {loading ? (
             <Heading as="h1" size="lg">
               Loading...

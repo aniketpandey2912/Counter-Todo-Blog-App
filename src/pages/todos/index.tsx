@@ -14,12 +14,10 @@ const TodoApp = () => {
   const [loading, setLoading] = useState(false);
 
   const getTodos = async () => {
-    setLoading(true);
     const res: any = await axios.get(
       "https://mock-server-app-ycs2.onrender.com/todos"
     );
     setTodos(res.data);
-    setLoading(false);
   };
 
   const addTodo = async (text: string) => {
@@ -51,8 +49,18 @@ const TodoApp = () => {
   };
 
   useEffect(() => {
+    setLoading(true);
     getTodos();
+    setLoading(false);
   }, []);
+
+  if (loading) {
+    return (
+      <Heading as="h1" size="lg" textAlign="center">
+        Loading...
+      </Heading>
+    );
+  }
 
   return (
     <>
@@ -67,20 +75,16 @@ const TodoApp = () => {
         <Heading mb="30px">TODO-APP</Heading>
         <VStack w="40%" m="auto">
           <TodoInput addTodo={addTodo} />
-          {loading ? (
-            <Heading as="h1" size="lg">
-              Loading...
-            </Heading>
-          ) : (
-            <Heading as="h1" size="lg">
-              Todo List
-            </Heading>
-          )}
+
+          <Heading as="h1" size="lg">
+            Todo List
+          </Heading>
 
           <TodoList
             todos={todos}
             toggleStatus={toggleStatus}
             deleteTodo={deleteTodo}
+            loading={loading}
           />
         </VStack>
       </Box>

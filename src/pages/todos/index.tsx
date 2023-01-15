@@ -57,7 +57,7 @@ const TodoApp = () => {
         <TodoInput addTodo={addTodo} />
         {todos.length === 0 ? (
           <Heading as="h1" size="lg">
-            There is nothing to show...
+            Loading...
           </Heading>
         ) : (
           <Heading as="h1" size="lg">
